@@ -43,7 +43,7 @@ def create_app():
     app.config['SESSION_PERMANENT'] = False
     app.config['SESSION_COOKIE_NAME'] = "session"
     app.config['SECRET_KEY'] = "put your key here"    
-    app.config['MAIL_SERVER'] = 'hosting25.serverhs.org'
+    app.config['MAIL_SERVER'] = 'server'
     app.config['MAIL_PORT'] = 587
     app.config['MAIL_USERNAME'] = 'email'
     app.config['MAIL_PASSWORD'] = 'password'

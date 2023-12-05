@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Explanation{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h4>Projects</h4>
+        <form action="/screen_dataset" method="get">
+		<div class="container mt-5">
+			<div  class="row">
+				<div class="col-12">
+					<select class="form-control" name="project_id" id="projectSelector" onchange="navigateToURL()">
+						<option value="-1">Choose an option...</option>						
+						{% for project in projects %}
+							<option value="{{ url_for('analysis.screen_dataset', project_id=project.id) }}">{{ project.name }}</option>
+						{% endfor %}
+				</div>
+			</div>	
+		</div>		
+		</form>
+    </div>
+	<script>
+		function navigateToURL() {
+			const selectElement = document.getElementById("projectSelector");
+			const url = selectElement.value;
+
+			if (url!=-1) {
+				window.location.href = url;
+			} else {
+				alert("Select a valid project!");
+			}
+		}
+	</script>	
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Explanation{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h4>Projects</h4>
+    <form action="#" id="form_metric" method="post">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12">
+                    <select class="form-control" name="project_id" id="projectSelector">
+                        <option value="-1" selected>Choose an option...</option>                        
+                        {% for project in projects %}
+                            <option value="{{ project.id }}">{{ project.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <select class="form-control" name="plot_type" id="plotSelector">
+                        <option value="-1" selected>Choose a plot type...</option>                        
+                        <option value="1">Line Plot</option>
+                        <option value="2">Box Plot</option>
+						<option value="3">Pareto Plot</option>
+						<option value="4">Measurement bulletin</option>
+                    </select>
+                </div>
+            </div>
+        </div>      
+		<div class="col col-sm-10">
+			<button type="button" class="btn btn-primary rounded-pill default_width" onclick="navigateToURL()">Show</button>
+    	</div>						
+    </form>
+</div>
+
+<script>
+    function navigateToURL() {
+        const projectElement = document.getElementById("projectSelector");
+        const plotElement = document.getElementById("plotSelector");
+        const formElement = document.getElementById("form_metric");
+        
+        const projectId = projectElement.value;
+        const plotType = plotElement.value;
+
+        let url = "";  
+
+        if (projectId != "-1" && plotType != "-1") {
+			if (plotType != "4") {
+				url = "/metric?project_id=" + projectId + "&plot_type=" + plotType;
+			} else {
+				url = "/measurement_bulletin/" + projectId;
+			}	
+        } else {
+            alert("Select the project and plot type");
+            return;  
+        }
+
+        formElement.action = url;
+        formElement.submit();
+
+    }
+</script>
+
+{% endblock %}

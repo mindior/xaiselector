@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script>
+		function confirmDeletion() {
+			return confirm("Are you sure you want to delete this item?");
+		}
+	</script>	
+    <style>
+        body {
+            background-color: #EBECEE;
+        }
+        .grid {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;			
+        }
+
+        .rectangle {
+			border: 2px solid #27b1bf;
+            padding: 20px;
+            width: 400px;
+        }	
+        .div-centralized {
+			font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+		.td-center {
+			text-align: center;		
+		}
+        .bottom-blue {
+            background-color: #007BFF;
+            color: white;             
+            padding: 10px 20px;       
+            border: none;             
+            border-radius: 5px;       
+            cursor: pointer;          
+            font-size: 16px;          
+            transition: background-color 0.3s;
+        }	
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }	
+		.custom-navbar {
+			background-color: #EBECEE;
+		}	
+        .centered-title {
+            text-align: center;
+        }
+</style>	
+    </style>	
+</head>
+<body>
+    <div class="container mt-5">
+        <div>
+            <h1 class="centered-title">Terms of Use - XAI Selector</h1>
+            <br><br>
+            <p class="text-left">
+            <strong>1. Acceptance of Terms</strong><br><br>
+            By accessing and using XAI Selector, you agree to be bound by these Terms of Use. If you do not agree to any of these terms, you are prohibited from using or accessing this service.<br><br>
+            <strong>2. Free Use</strong><br><br>
+            XAI Selector is offered free of charge to all users. No payment is required to access or use the service.<br><br>
+            <strong>3. Security and Data Integrity</strong><br><br>
+            We take security precautions to protect and make the XAI Selector service available on the web. However, given that the service is offered free of charge, we cannot provide guarantees regarding data integrity. Users are advised to keep backup copies of any information they consider valuable.<br><br>
+            <strong>4. Contact and suggestions</strong><br><br>
+            We are always looking to improve our service. If you have any suggestions, questions or comments, please contact us at service@xaiexplained.com. We welcome feedback from our community and encourage users to share their opinions and ideas with us.<br><br>
+            <strong>5. Limitation of Liability</strong><br><br>
+            XAI Selector is provided "as is" and "as available". We make no warranties of any kind, express or implied, regarding the completeness, accuracy, reliability, suitability or availability of the service. Under no circumstances will we be liable for any loss or damage, including, without limitation, indirect or consequential loss or damage, or any loss or damage resulting from loss of data or profits arising from the use of this service. If you wish, the application's source code is available at https://github.com/mindior/xaiselector for download and you can use it freely, being able to install the software in your own environment.<br><br>
+            <strong>7. Data privacy</strong><br><br>
+            By accepting these terms of use you agree to share your data with the service administrators, who will only use it to carry out analyses, although they agree not to disclose it without your explicit authorisation. If necessary, we will contact you via the e-mail address registered with your user account to request authorisation for disclosure.<br><br>
+            <strong>6. Changes to the Terms of Use</strong><br><br>
+            We reserve the right to modify or replace these Terms of Use at any time. It is the user's responsibility to periodically review these Terms of Use to stay informed of updates.<br><br>
+            By continuing to use XAI Selector, you signify your acceptance of these Terms of Use. If you do not agree to be bound by these Terms of Use, please do not use our service.
+            </p>
+            <label>
+                <strong><input type="checkbox" id="myCheckbox"> I accept the terms and conditions</strong>
+            </label>
+        </div>          
+        <br><br>
+        <h2>Add User</h2>
+        <form  action="{{ url_for('users.users_internet') }}" method="post" id="form_user">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Confirm Password:</label>
+                <input type="password" class="form-control" name="confirm_password" required>
+            </div>							
+			<div class="row">
+				<div class="col col-sm-10">
+		            <button type="submit" class="btn btn-primary rounded-pill default_width">Save</button>
+				</div>
+			</div>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $("form").submit(function(event) {
+                var password = $("input[name='password']").val();
+                var confirmPassword = $("input[name='confirm_password']").val();
+    
+                if (password !== confirmPassword) {
+                    alert("Passwords do not match!");
+                    event.preventDefault();
+                }
+    
+                var checkbox = document.getElementById('myCheckbox');
+                if (!checkbox.checked) {
+                    alert('You must accept the terms and conditions of use!');
+                    event.preventDefault();
+                } 
+            });
+        });
+    </script>
+
+</body>
+</html>

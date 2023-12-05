@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+		.full-height {
+			height: 100vh;
+			overflow: hidden;  /* Esconde o conteúdo que ultrapassa o tamanho do elemento */
+		}
+		.row, .col-6 {
+			padding: 0;
+		}
+        .fixed-card {
+            width: 250px;  /* Largura fixa */
+            height: 175px; /* Altura fixa */
+            margin-bottom: 10px; /* Espaço entre o card e o texto abaixo */
+        }
+		.text-container {
+			width: 350px; /* Mesma largura que os cards */
+			text-align: center;
+			margin-bottom: 20px; /* Espaço entre o texto e o próximo card */
+		}
+		.bg-collor {
+			background-color: #EEEFF0;
+		}	
+		img.responsive {
+			width: auto;       /* Ajusta-se automaticamente à largura */
+			height: 90vh;      /* Ocupa 50% da altura da janela de visualização */
+			max-width: 100%;   /* Garante que a imagem não exceda a largura do container */
+			display: block;    /* Remove espaços em branco ao redor da imagem */
+			margin: 0 auto;    /* Centraliza a imagem horizontalmente */
+		}
+		body, html {
+			margin: 0;
+			padding: 0;
+		}
+		.container, .container-fluid, .row {
+			margin-left: 0;
+			margin-right: 0;
+		}
+		*, *::before, *::after {
+			box-sizing: border-box;
+		}
+		.col-6.d-flex.flex-column.justify-content-center.align-items-center {
+			overflow-y: auto;   /* Adiciona uma barra de rolagem vertical se necessário */
+			padding: 20px;      /* Adiciona um pouco de espaço ao redor do conteúdo */
+		}
+		.max-height-img {
+			max-height: 100vh;
+		}
+		#main-container.scaled {
+			transform-origin: top left; /* O ponto a partir do qual a transformação é aplicada */
+		}
+
+</style>		
+    </style>
+</head>
+<body class="bg-collor">
+
+<div id="main-container">
+	
+	<div class="row full-height">
+
+    <div class="col-6 d-flex justify-content-center align-items-top bg-collor">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" class="responsive">
+    </div>
+
+    <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+
+		<div>
+            <div class="d-flex flex-column justify-content-center">
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+					<ul>
+						{% for message in messages %}
+							<li>{{ message }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				{% endwith %}
+            </div>
+        </div>
+        
+		<div class="fixed-card card shadow mb-2">
+            <div class="card-body d-flex flex-column justify-content-center">
+				<form action="{{ url_for('projects.get_project') }}" method="post">			
+					<input type="text" class="form-control mb-3" placeholder="Enter code" name="code">
+					<button class="btn btn-primary btn-block rounded-pill">Access Survey</button>				
+				</form>
+            </div>
+        </div>
+		<div class="text-container">
+			<p class="text-center">If you are a survey participant, enter the code provided and click on the button to access the forms.</p>
+        </div>			
+
+        <div class="fixed-card card shadow mb-2">
+            <div class="card-body d-flex flex-column justify-content-between">
+				<form action="{{ url_for('main.login') }}" method="post">
+					<input type="email" class="form-control mb-3" placeholder="Email" name="email">
+					<input type="password" class="form-control mb-3" placeholder="Password" name="password">
+					<button class="btn btn-primary btn-block rounded-pill">Access projects</button>
+				</form>					
+            </div>
+        </div>
+		<div class="text-container">		
+			<p class="text-center">If you are the administrator of any project, enter your email and password or <a href="{{ url_for('users.add_user_internet') }}">register a user</a><p class="text-center"><a href="{{ url_for('users.recover_password') }}">Forgot password?</a></p></p>
+        </div>          
+    </div>
+</div>
+</div>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('main-container');
+    const viewportHeight = window.innerHeight;
+    const contentHeight = container.offsetHeight;
+
+    if (contentHeight > viewportHeight) {
+        const scaleValue = viewportHeight / contentHeight;
+        container.style.transform = 'scale(' + scaleValue + ')';
+        container.classList.add('scaled');
+    }
+});
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

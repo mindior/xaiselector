@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Metric{% endblock %}
+
+{% block content %}
+	<br><br>
+    <div class="container">
+         <img src="{{ url_for('static', filename=request.cookies.get('session') ~ '.png') }}" alt="Explanation" style="width: 100%; height: auto;">
+    </div>
+{% endblock %}

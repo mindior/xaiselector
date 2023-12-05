@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style type="text/css">
+		.bgimg {
+			background-image: url("{{ url_for('static', filename='images/logo.png') }}");
+			height: 620px; 
+			width: 530px;
+		}
+	</style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Login</h2>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-{{ messages[0][0] }}">
+        {{ messages[0][1] }}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <form method="post" action="{{ url_for('login') }}">
+		<div class="bgimg">
+			<div class="form-group">
+				<label for="email">Email:</label>
+				<input type="text" class="form-control" id="email" name="email" required>
+			</div>
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<input type="password" class="form-control" id="password" name="password" required>
+			</div>
+			<button type="submit" class="btn btn-primary">Logon</button>
+		</div>			
+    </form>
+</div>
+
+</body>
+</html>

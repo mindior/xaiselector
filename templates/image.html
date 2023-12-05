@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Add Image{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Add Image</h2>
+        <form action="{{ url_for('projects.images', form_id=form_id) }}" enctype="multipart/form-data" method="post">
+			<input type="hidden" name="form_id" value="{{ form_id }}">
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" name="description" required></textarea>
+            </div>
+            <div class="form-group">			
+				<label for="image">Select an Image:</label>
+                <input type="file" class="form-control-file" name="image" accept="image/jpg" required>
+            </div>
+            <div class="row">
+				<div class="col col-sm-2">
+					<a href="{{ url_for('projects.edit_form', form_id=form_id) }}" class="btn btn-primary mb-3 rounded-pill default_width">Back</a>
+				</div>	
+				<div class="col col-sm-10">
+					<button type="submit" class="btn btn-primary rounded-pill default_width">Save</button>
+				</div>						
+			</div>	
+        </form>
+    </div>
+{% endblock %}

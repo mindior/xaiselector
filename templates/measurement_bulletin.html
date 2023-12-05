@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Measurement bulletin{% endblock %}
+
+{% block content %}
+<br><br>
+<table style="text-align: center;margin-left:auto;margin-right:auto;">
+	<tr>
+		<td>
+			<img src="{{ url_for('static', filename=request.cookies.get('session') ~ '_ta.png') }}" alt="Trust After" style="width: 100%; height: auto;">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="{{ url_for('static', filename=request.cookies.get('session') ~ '_diff.png') }}" alt="Difference Trust" style="width: 100%; height: auto;">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="{{ url_for('static', filename=request.cookies.get('session') ~ '_ratio_ta.png') }}" alt="Difference Trust" style="width: 100%; height: auto;">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="{{ url_for('static', filename=request.cookies.get('session') ~ '_us.png') }}" alt="User Satisfaction" style="width: 100%; height: auto;">
+		</td>	
+	</tr>
+	<tr>
+		<td>
+			<img src="{{ url_for('static', filename=request.cookies.get('session') ~ '_ratio_us.png') }}" alt="User Satisfaction" style="width: 100%; height: auto;">
+		</td>	
+	</tr>
+</table>
+
+<script>
+
+	const valuesList = [];
+	
+	function checkValueInList(event) {
+		const checkbox = event.target;
+		if (checkbox.type === "checkbox" && !valuesList.includes(checkbox.value)) {
+			alert("The checkbox value is not in the list!");
+		}
+	}
+
+	document.addEventListener('DOMContentLoaded', function() {
+		const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+		checkboxes.forEach(function(checkbox) {
+			checkbox.addEventListener('mouseover', checkValueInList);
+		});
+	});	
+
+</script>
+{% endblock %}

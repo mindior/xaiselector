@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Form{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+			<div>
+            <div class="d-flex flex-column justify-content-center">
+				{% with messages = get_flashed_messages(with_categories=true) %}
+					{% if messages %}
+					<ul>
+						{% for category, message in messages %}
+							<li class="alert alert-{{ category }}">{{ message }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				{% endwith %}
+            </div>
+        </div>
+        <h2>Form</h2>
+        <form  action="{{ url_for('projects.edit_form') }}"  enctype="multipart/form-data" method="post">
+			<input type="hidden" name="form_id" value="{{ form.id }}">
+
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" name="name" value="{{ form.name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Order:</label>
+                <input type="text" class="form-control" name="order" value="{{ form.order }}" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" name="description" required>{{ form.description }}</textarea>
+            </div>		
+            <div class="form-group">
+                <label for="name">Technique:</label>
+                <input type="text" class="form-control" name="technique" value="{{ form.technique }}">
+            </div>
+			<div>
+				<a href="{{ url_for('projects.add_image', form_id=form.id) }}" class="btn btn-primary mb-3 rounded-pill default_width">Add Image</a>
+			</div>
+			<div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Image</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for image in images %}
+							<tr>
+								<td><img src="{{ url_for('projects.image_form', image_id=image.id) }}" alt="Explanation"></td>
+								<td><a href="/delete_image/{{ form.id }}/{{ image.id }}" class="btn btn-sm" onclick="return confirmDeletion();"><img src="{{ url_for('static', filename='images/delete.png') }}" alt="No" width="25" height="25"></a></td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+            <button type="submit" class="btn btn-primary rounded-pill default_width">Save</button>
+        </form>
+		<br>
+		<br>		
+		<div>
+			<a href="{{ url_for('projects.add_question', form_id=form.id) }}" class="btn btn-primary mb-3 rounded-pill default_width">Add Question</a>
+		</div>
+		<div>
+	        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for question in questions %}
+                    <tr>
+                        <td>{{ question.description }}</td>
+                        <td><a href="/show_question/{{ form.id }}/{{ question.id }}" class="btn btn-sm"><img src="{{ url_for('static', filename='images/edit.png') }}" alt="No" width="25" height="25"></a></td>
+                        <td><a href="/delete_question/{{ form.id }}/{{ question.id }}" class="btn btn-sm" onclick="return confirmDeletion();"><img src="{{ url_for('static', filename='images/delete.png') }}" alt="No" width="25" height="25"></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+		</div>
+		<a href="/show_project/{{form.project_id}}/1" class="btn btn-primary mb-3 rounded-pill default_width">Back</a>
+    </div>
+{% endblock %}

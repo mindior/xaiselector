@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Image{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+			<div>
+            <div class="d-flex flex-column justify-content-center">
+				{% with messages = get_flashed_messages(with_categories=true) %}
+					{% if messages %}
+					<ul>
+						{% for category, message in messages %}
+							<li class="alert alert-{{ category }}">{{ message }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				{% endwith %}
+            </div>
+        </div>
+        <h2>Image</h2>
+        <form  action="{{ url_for('projects.edit_image') }}"  enctype="multipart/form-data" method="post">
+			<input type="hidden" name="form_id" value="{{ form.id }}">
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" name="description" required>{{ form.description }}</textarea>
+            </div>			
+			<div class="form-info">
+            {% if form.image %}
+                <img src="{{ url_for('projects.image_form', form_id=form.id) }}" alt="Explanation">
+            {% else %}
+                <p>No image available</p>
+            {% endif %}
+			</div>			
+            <div class="form-group">			
+				<label for="image">Select an Image:</label>
+                <input type="file" class="form-control-file" name="image" accept="image/jpg" required>
+            </div>		
+            <button type="submit" class="btn btn-primary rounded-pill default_width">Save</button>
+        </form>
+		<br>
+		<br>		
+		<a href="{{ url_for('projects.edit_project', project_id=form.project_id) }}" class="btn btn-primary mb-3 rounded-pill default_width">Back</a>
+    </div>
+{% endblock %}

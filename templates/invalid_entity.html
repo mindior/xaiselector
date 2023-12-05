@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+		<div class="mb-2">
+            <div class="d-flex flex-column justify-content-center alert alert-danger" role="alert">
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+					<ul>
+						{% for message in messages %}
+							<li>{{ message }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				{% endwith %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

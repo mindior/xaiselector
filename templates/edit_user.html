@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>User</h2>
+        <form  action="{{ url_for('users.edit_user') }}" method="post">
+			<input type="hidden" name="user_id" value="{{ user.id }}">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" name="name" value="{{ user.name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" value="{{ user.email }}" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Confirm Password:</label>
+                <input type="password" class="form-control" name="confirm_password" required>
+            </div>		
+			<div class="row">
+				<div class="col col-sm-1">
+					<a href="{{ request.referrer or '/projects/1' }}" class="btn btn-primary mb-3">Back</a>
+				</div>
+				<div class="col col-sm-11">
+		            <button type="submit" class="btn btn-primary">Save</button>
+				</div>
+			</div>
+        </form>
+    </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("form").submit(function(event) {
+            var password = $("input[name='password']").val();
+            var confirmPassword = $("input[name='confirm_password']").val();
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                event.preventDefault(); 
+            }
+        });
+    });
+</script>
+{% endblock %}

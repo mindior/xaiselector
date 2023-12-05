@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Explanation{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h4>Projects</h4>
+        <form action="{{ url_for('analysis.polar_plot') }}" method="post" id="radar_plot">
+		<input type="hidden" name="weights" id="weights">
+		<div  class="row">
+			<div class="col-12">
+				<select class="form-control" name="project_id" id="projectSelector">
+					<option value="-1" selected>Choose an option...</option>						
+					{% for project in projects %}
+						<option value="{{ project.id }}">{{ project.name }}</option>
+					{% endfor %}
+				</select>	
+			</div>
+		</div>	
+        <div class="row">
+            <div class="col-12">
+                 <select class="form-control" name="weights_position" id="weightSelector">
+					<option value="-1" selected>Choose a plot type...</option>    
+					<option value="1">Trust: 1.0 - Satisfaction: 0.0</option>
+					<option value="2">Trust: 0.975 - Satisfaction: 0.025</option>
+					<option value="3">Trust: 0.95 - Satisfaction: 0.05</option>
+					<option value="4">Trust: 0.925 - Satisfaction: 0.075</option>
+					<option value="5">Trust: 0.9 - Satisfaction: 0.1</option>
+					<option value="6">Trust: 0.875 - Satisfaction: 0.125</option>
+					<option value="7">Trust: 0.85 - Satisfaction: 0.15</option>
+					<option value="8">Trust: 0.825 - Satisfaction:  0.175</option>
+					<option value="9">Trust: 0.8 - Satisfaction: 0.2</option>
+					<option value="10">Trust: 0.775 - Satisfaction: 0.225</option>
+					<option value="11">Trust: 0.75 - Satisfaction:  0.25</option>
+					<option value="12">Trust: 0.725 - Satisfaction: 0.275</option>
+					<option value="13">Trust: 0.7 - Satisfaction: 0.3</option>
+					<option value="14">Trust: 0.675 - Satisfaction:  0.325</option>
+					<option value="15">Trust: 0.65 - Satisfaction: 0.35</option>
+					<option value="16">Trust: 0.625 - Satisfaction: 0.375</option>
+					<option value="17">Trust: 0.6 - Satisfaction: 0.4</option>
+					<option value="18">Trust: 0.575 - Satisfaction: 0.425</option>
+					<option value="19">Trust: 0.55 - Satisfaction: 0.45</option>
+					<option value="20">Trust: 0.525 - Satisfaction: 0.475</option>
+					<option value="21">Trust: 0.5 - Satisfaction: 0.5</option>
+					<option value="22">Trust: 0.475 - Satisfaction: 0.525</option>
+					<option value="23">Trust: 0.45 - Satisfaction: 0.55</option>
+					<option value="24">Trust: 0.425 - Satisfaction: 0.575</option>
+					<option value="25">Trust: 0.4 - Satisfaction: 0.6</option>
+					<option value="26">Trust: 0.375 - Satisfaction: 0.625</option>
+					<option value="27">Trust: 0.35 - Satisfaction: 0.65</option>
+					<option value="28">Trust: 0.325 - Satisfaction: 0.675</option>
+					<option value="29">Trust: 0.3 - Satisfaction: 0.7</option>
+					<option value="30">Trust: 0.275 - Satisfaction: 0.725</option>
+					<option value="31">Trust: 0.25 - Satisfaction: 0.75</option>
+					<option value="32">Trust: 0.225 - Satisfaction: 0.775</option>
+					<option value="33">Trust: 0.2 - Satisfaction: 0.8</option>
+					<option value="34">Trust: 0.175 - Satisfaction: 0.825</option>
+					<option value="35">Trust: 0.15 - Satisfaction: 0.85</option>
+					<option value="36">Trust: 0.125 - Satisfaction: 0.875</option>
+					<option value="37">Trust: 0.1 - Satisfaction: 0.9</option>
+					<option value="38">Trust: 0.075 - Satisfaction: 0.925</option>
+					<option value="39">Trust: 0.05 - Satisfaction: 0.95</option>
+					<option value="40">Trust: 0.025 - Satisfaction: 0.975</option>
+					<option value="41">Trust: 0.0 - Satisfaction: 1.0</option>
+                 </select>
+            </div>
+         </div>
+		<div class="col col-sm-10">
+			<button type="button" class="btn btn-primary rounded-pill default_width" onclick="navigateToURL()">Show</button>
+    	</div>								 
+		</form>
+    </div>
+	<script>
+		function navigateToURL() {
+			const formElement = document.getElementById("radar_plot");
+			const selectElement = document.getElementById("projectSelector");
+			const weightElement = document.getElementById("weightSelector");	
+			var weightText = $("#weightSelector option:selected").text();
+			const weights = document.getElementById("weights");				
+			const combo1 = selectElement.value;
+			const combo2 = weightElement.value;
+
+			if (combo1!=-1 && combo2!=-1) {
+				weights.value = weightText;
+				formElement.submit();
+			} else {
+				alert("Select a valid option!");
+			}
+		}
+	</script>	
+{% endblock %}

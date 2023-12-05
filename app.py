@@ -36,17 +36,17 @@ def create_app():
     app = Flask(__name__)
 
     # Configuração do PostgreSQL
-    #DATABASE_URL = 'postgresql://postgres:@L17bd6@F@@db:5432/xaiselector'
-    DATABASE_URL =  'postgresql://postgres:%40L17bd6%40F%40@db:5432/xaiselector'
+    #DATABASE_URL = 'postgresql://user:passworddb:5432/xaiselector'
+    DATABASE_URL =  'postgresql://user:passworddb:5432/xaiselector'
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
     app.config['SESSION_TYPE'] = 'filesystem'
     app.config['SESSION_PERMANENT'] = False
     app.config['SESSION_COOKIE_NAME'] = "session"
-    app.config['SECRET_KEY'] = "b8208482c861332dcaa7679001dd2f22b51e033ffd010903"    
+    app.config['SECRET_KEY'] = "put your key here"    
     app.config['MAIL_SERVER'] = 'hosting25.serverhs.org'
     app.config['MAIL_PORT'] = 587
-    app.config['MAIL_USERNAME'] = 'service@xaiexplained.com'
-    app.config['MAIL_PASSWORD'] = 'Ty23Ui#$&Wq'
+    app.config['MAIL_USERNAME'] = 'email'
+    app.config['MAIL_PASSWORD'] = 'password'
     app.config['MAIL_USE_TLS'] = True
     app.config['MAIL_USE_SSL'] = False    
     

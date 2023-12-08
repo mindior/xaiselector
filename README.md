@@ -28,7 +28,7 @@ The XAI Selector application is a prototype built to facilitate the evaluation o
 8) The application is implemented to support satisfaction and trust questionnaires with a five-point Likert scale, with normal questions having options with values from 1 to 5 and inverted questions having values of 1, 0.5, 0.33, 0.25 and 0.2.
 
 
-9) The application is available on the web for view-only access. It provides the results of the two experiments carried out with real users in the context of the underlying research work. To access it, please use the user 'contact@xaiexplained.com' with the password senha to access the management of the experiments and the code UMX971 to view the user data collection screen.
+9) The application is available on the web for test. It provides the results of the two experiments carried out with real users in the context of the underlying research work. To access it, please use the user 'contact@xaiexplained.com' with the password senha to access the management of the experiments and the code UMX971 to view the user data collection screen. You can create your own experiments. Register a new user and log in.  
 
 
 10) The 'generate default project' functionality will only work if the backup of the database provided is recovered.

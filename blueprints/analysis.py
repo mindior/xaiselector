@@ -191,7 +191,7 @@ def generate_image():
     fig = ax.get_figure()
     
     fig.suptitle('Exploratory Data Analysis', fontsize=25)
-    plt.savefig(f"static/{request.cookies.get('session')}.png", dpi=300)
+    plt.savefig(f"static/{request.cookies.get('session')}.png", dpi=72)
     plt.close()
 
 @analysis_blueprint.route('/eda_menu', methods=['GET'])
@@ -366,7 +366,7 @@ def generate_line_plot(sorted_dict, x_labels):
     plt.ylabel('Value')
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.savefig(f"static/{request.cookies.get('session')}.png",dpi=300)
+    plt.savefig(f"static/{request.cookies.get('session')}.png",dpi=72)
     plt.close()
 
 def generate_boxplot(sorted_dict):
@@ -417,7 +417,7 @@ def generate_boxplot(sorted_dict):
         upper_whisker = boxplot['whiskers'][i * 2 + 1]
         plt.text(i + 1, upper_whisker.get_ydata()[1] + 0.002, kappa_text, ha='center', va='bottom', fontsize=10)
 
-    plt.savefig(f"static/{request.cookies.get('session')}.png", dpi=300)
+    plt.savefig(f"static/{request.cookies.get('session')}.png", dpi=72)
     plt.close()
 
 def get_techniques_names(project_id):
@@ -466,6 +466,10 @@ def make_dists(results,quantity,project_id, kappa):
         dists[key] = (dists[key], kappa[index])
 
     dists = dict(sorted(dists.items(), key=lambda item: np.median(item[1][0]), reverse=True))        
+    
+    for key, (array_list, value) in dists.items():
+        scalar = [arr.item() for arr in array_list]
+        dists[key] = (scalar, value)
 
     return dists
     
@@ -644,7 +648,7 @@ def calculate_measures(project_id):
     plt.bar(labels, sums_ta)
     plt.ylabel('Trust After')
     plt.title('Trust After Summary')
-    plt.savefig(f"static/{request.cookies.get('session')}_ta.png",dpi=300)
+    plt.savefig(f"static/{request.cookies.get('session')}_ta.png",dpi=72)
     plt.close()  
     
     sums_us = [df.astype(float).sum().sum() for df in partitioned_dfs_us]
@@ -655,7 +659,7 @@ def calculate_measures(project_id):
     plt.bar(labels, sums_us)
     plt.ylabel('User Satisfaction')
     plt.title('User Satisfaction Summary')
-    plt.savefig(f"static/{request.cookies.get('session')}_us.png",dpi=300)
+    plt.savefig(f"static/{request.cookies.get('session')}_us.png",dpi=72)
     plt.close()  
     
     dataframes_numerator = []
@@ -672,7 +676,7 @@ def calculate_measures(project_id):
     plt.bar(labels, sums_diff)
     plt.ylabel('Difference')
     plt.title('Difference between Trust After and Trust Before Summary')
-    plt.savefig(f"static/{request.cookies.get('session')}_diff.png",dpi=300)
+    plt.savefig(f"static/{request.cookies.get('session')}_diff.png",dpi=72)
     plt.close()  
 
     dataframes_results = [((df.astype(float)+4)/8).sum().sum() for df in dataframes_numerator] # alterado
@@ -681,7 +685,7 @@ def calculate_measures(project_id):
     plt.bar(labels, dataframes_results)
     plt.ylabel('Ratio')
     plt.title('Ratio between Difference Trust and Mean Summary')
-    plt.savefig(f"static/{request.cookies.get('session')}_ratio_ta.png",dpi=300)
+    plt.savefig(f"static/{request.cookies.get('session')}_ratio_ta.png",dpi=72)
     plt.close()  
     
     us_dataframes = []
@@ -698,7 +702,7 @@ def calculate_measures(project_id):
     plt.bar(labels, dataframes_results)
     plt.ylabel('Ratio')
     plt.title('Ratio between User Satisfaction and Mean Summary')
-    plt.savefig(f"static/{request.cookies.get('session')}_ratio_us.png",dpi=300)
+    plt.savefig(f"static/{request.cookies.get('session')}_ratio_us.png",dpi=72)
     plt.close()  
            
 @analysis_blueprint.route('/metric', methods=['POST'])
@@ -717,7 +721,10 @@ def metric():
     for i in range(1,42):
 
         df_result = (w1 * w2 * dataframes_results_final_tr) + ( w1 * w3 * dataframes_results_final_us ) #Calculate the metric
-        results.append(df_result.mean(axis=1))
+        #results.append(df_result.mean(axis=1))
+
+        w1_ = sum(w1)
+        results.append(df_result.sum(axis=1)/w1_)
 
         x_labels.append((w2,w3))
 
@@ -817,7 +824,7 @@ def pareto_plot(sorted_dict):
         
     plt.subplots_adjust(bottom=0.2)        
     
-    plt.savefig(f"static/{request.cookies.get('session')}.png",dpi=300)
+    plt.savefig(f"static/{request.cookies.get('session')}.png",dpi=72)
     plt.close()  
 
 def weighted_kappa(df,project_id):        

@@ -3,7 +3,7 @@ Decision support system to evaluate the adaptation of XAI techniques and a given
 
 The XAI Selector application is a prototype built to facilitate the evaluation of different explanations, provided by a set of pre-defined XAI methods, by a group of end users. This application is the result of an experimental academic project, and the code provided is a prototype created to validate the concept, although it is fully functional. The application was implemented using the Python language and the Flask web framework. Some conventions must be followed in order to make the prototype work correctly. No functionalities have been implemented to control these conventions in this first version of the prototype, therefore the prototype can only work correctly if the conventions listed below are strictly followed:
 
-You can access the software available at https://www.xaiselector.com and view the data from the experiments using the user contact@xaiexplained.com and the password 'senha'.
+IMPORTANT: You can access the software available at https://www.xaiselector.com and view the experiment data using the user contact@xaiexplained.com and the password 'senha'. You can also use the code UMX971 in the Access Survey field to view the user data collection screen.
 
 1) For each of the XAI methods evaluated, there should be a questionnaire for assessing satisfaction with the explanations and another for assessing the trust in the model after the explanations have been presented.
 
@@ -32,16 +32,13 @@ You can access the software available at https://www.xaiselector.com and view th
 9) The application is implemented to support satisfaction and trust questionnaires with a five-point Likert scale, with normal questions having options with values from 1 to 5 and inverted questions having values of 1, 0.5, 0.33, 0.25 and 0.2.
 
 
-10) The application is available on the web for test. It provides the results of the two experiments carried out with real users in the context of the underlying research work. To access it, please use the user 'contact@xaiexplained.com' with the password senha to access the management of the experiments and the code UMX971 to view the user data collection screen. You can create your own experiments. Register a new user and log in.  
+10) The 'generate default project' functionality will only work if the backup of the database provided is recovered.
 
 
-11) The 'generate default project' functionality will only work if the backup of the database provided is recovered.
+11) There is a feature on the main page of the application, 'create user', which is not available on the web, but only in the source code. Without this functionality it is not possible to create experiments.
 
 
-12) There is a feature on the main page of the application, 'create user', which is not available on the web, but only in the source code. Without this functionality it is not possible to create experiments.
-
-
-13) To create an experiment, please register a user and access the application through it. This will give you access to the experiment management module.
+12) To create an experiment, please register a user and access the application through it. This will give you access to the experiment management module.
 
 
 Please, when accessing the application on the web, use the logout functionality to exit the application. Do not simply close the browser. This ensures that the files generated during access are removed from the server, avoiding unnecessary disk space consumption.

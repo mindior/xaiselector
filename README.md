@@ -42,6 +42,6 @@ IMPORTANT: You can access the software available at https://www.xaiselector.com 
 
 
 Please, when accessing the application on the web, use the logout functionality to exit the application. Do not simply close the browser. This ensures that the files generated during access are removed from the server, avoiding unnecessary disk space consumption.
-We do not guarantee to provide any kind of support, but you can contact the developer of the tool and first author of the work via e-mail at mindior@gmail.com.
+We do not guarantee to provide any kind of support, but you can contact the developer of the tool via e-mail at contact@xaiexplained.com.
 We will be very pleased to hear from you if you report any inconsistencies in the prototype.
 

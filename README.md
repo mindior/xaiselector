@@ -3,6 +3,7 @@ Decision support system to evaluate the adaptation of XAI techniques and a given
 
 The XAI Selector application is a prototype built to facilitate the evaluation of different explanations, provided by a set of pre-defined XAI methods, by a group of end users. This application is the result of an experimental academic project, and the code provided is a prototype created to validate the concept, although it is fully functional. The application was implemented using the Python language and the Flask web framework. Some conventions must be followed in order to make the prototype work correctly. No functionalities have been implemented to control these conventions in this first version of the prototype, therefore the prototype can only work correctly if the conventions listed below are strictly followed:
 
+You can access the software available at https://www.xaiselector.com and view the data from the experiments using the user contact@xaiexplained.com and the password 'senha'.
 
 1) For each of the XAI methods evaluated, there should be a questionnaire for assessing satisfaction with the explanations and another for assessing the trust in the model after the explanations have been presented.
 

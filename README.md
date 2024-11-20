@@ -1,5 +1,5 @@
 # xaiselector
-Decision support system to evaluate the adaptation of XAI techniques and a given context
+A context-aware decision support system for selecting explainable artificial intelligence methods in business organizations
 
 The XAI Selector application is a prototype built to facilitate the evaluation of different explanations, provided by a set of pre-defined XAI methods, by a group of end users. This application is the result of an experimental academic project, and the code provided is a prototype created to validate the concept, although it is fully functional. The application was implemented using the Python language and the Flask web framework. Some conventions must be followed in order to make the prototype work correctly. No functionalities have been implemented to control these conventions in this first version of the prototype, therefore the prototype can only work correctly if the conventions listed below are strictly followed:
 
